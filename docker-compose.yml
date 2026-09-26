@@ -1,0 +1,16 @@
+name: memos
+
+services:
+  memos:
+    image: neosmemo/memos:stable
+    restart: unless-stopped
+    volumes:
+      - /mnt/app-data/memos/data:/var/opt/memos
+    expose:
+      - '5230'
+    healthcheck:
+      test: ['CMD-SHELL', 'kill -0 1']
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
